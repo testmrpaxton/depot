@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+#
+
+%x[ osascript 2>/dev/null <<EOF
+	     tell application "Terminal"
+	     tell application "System Events" to keystroke "t" using command down
+	     do script with command "printf '\\\e]1;depot@views\\\a'; cd app/views; clear; tree" in front window
+	     end tell
+	     EOF]
