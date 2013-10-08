@@ -1,9 +1,32 @@
 #!/usr/bin/ruby
 #
 
-%x[ osascript 2>/dev/null <<EOF
-	     tell application "Terminal"
-	     tell application "System Events" to keystroke "t" using command down
-	     do script with command "printf '\\\e]1;depot@views\\\a'; cd app/views; clear; tree" in front window
-	     end tell
-	     EOF]
+def open_new_tab( folder )
+	%x[ osascript 2>/dev/null <<EOF
+		     tell application "Terminal"
+		     tell application "System Events" to keystroke "t" using command down
+		     do script with command "cd '#{folder}'; clear" in front window
+		     end tell
+		     EOF
+	]
+end
+
+folder = Dir.getwd + "/app/" + ARGV[0]
+
+#views
+#controllers
+#models
+#config
+#test
+#log
+#db
+
+
+puts folder
+
+open_new_tab( folder )
+
+
+#echo -ne '\033]0;#{folder}\007'
+
+
